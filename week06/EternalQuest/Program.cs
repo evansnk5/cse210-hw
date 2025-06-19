@@ -1,11 +1,13 @@
 using System;
-using System.Collections.Generic;
 
-class Program
+namespace EternalQuest
 {
-    static void Main(string[] args)
+    class Program
     {
-        GoalManager goalManager = new GoalManager();
-        goalManager.Start();
+        static void Main(string[] args)
+        {
+            GoalManager goalManager = new GoalManager();
+            goalManager.Start();
+        }
     }
 }

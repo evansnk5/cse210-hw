@@ -1,25 +1,25 @@
-public class SimpleGoal : Goal
+namespace EternalQuest
 {
-    private bool _isComplete;
-
-    public SimpleGoal(string name, string description, int points) 
-        : base(name, description, points)
+    public class SimpleGoal : Goal
     {
-        _isComplete = false;
-    }
+        public SimpleGoal(string name, string description, int points) 
+            : base(name, description, points) { }
 
-    public override int RecordEvent()
-    {
-        _isComplete = true;
-        return _points;
-    }
+        public override void RecordEvent()
+        {
+            _isComplete = true;
+        }
 
-    public override bool IsComplete() => _isComplete;
+        public override bool IsComplete() => _isComplete;
 
-    public override string GetStatus() => _isComplete ? "[X]" : "[ ]";
+        public override string GetDetailsString()
+        {
+            return $"{_name} ({_description}) [{(IsComplete() ? "X" : " ")}]";
+        }
 
-    public override string GetStringRepresentation()
-    {
-        return $"SimpleGoal|{_name}|{_description}|{_points}|{_isComplete}";
+        public override string GetStringRepresentation()
+        {
+            return $"SimpleGoal:{_name},{_description},{_points},{_isComplete}";
+        }
     }
 }

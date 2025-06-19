@@ -1,16 +1,32 @@
-public class EternalGoal : Goal
+namespace EternalQuest
 {
-    public EternalGoal(string name, string description, int points) 
-        : base(name, description, points) {}
-
-    public override int RecordEvent() => _points;
-
-    public override bool IsComplete() => false;
-
-    public override string GetStatus() => "[∞]";
-
-    public override string GetStringRepresentation()
+    public class EternalGoal : Goal
     {
-        return $"EternalGoal|{_name}|{_description}|{_points}";
+        private int _timesCompleted;
+
+        public EternalGoal(string name, string description, int points) 
+            : base(name, description, points)
+        {
+            _timesCompleted = 0;
+        }
+
+        public override void RecordEvent()
+        {
+            _timesCompleted++;
+        }
+
+        public override bool IsComplete() => false; // Eternal goals are never complete
+
+        public override string GetDetailsString()
+        {
+            return $"{_name} ({_description}) - Completed {_timesCompleted} times";
+        }
+
+        public override string GetStringRepresentation()
+        {
+            return $"EternalGoal:{_name},{_description},{_points},{_timesCompleted}";
+        }
+
+        public override int GetPoints() => _points * _timesCompleted;
     }
 }
